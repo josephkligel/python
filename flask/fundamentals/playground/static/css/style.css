@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 50px 0 30px 0;
+    text-align: center;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+#square-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.square {
+    /* background-color: blue; */
+    border: solid 2.5px #000;
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+}
