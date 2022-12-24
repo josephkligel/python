@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* --------- Headers ------------ */
+
+h1 {
+    margin: 30px;
+    text-align: center;
+}
+
+h3 {
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* ---------- Container ---------- */
+
+#container > * {
+    margin: 10px;
+}
+
+/* ------------- Button Containers ----------- */
+
+#button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    width: auto;
+    padding: 5px 10px;
+    box-shadow: black 1px 1px;
+    border-width: thin;
+    border-radius: 5px;
+    color: white;
+}
+
+#two-button {
+    background-color: #E75480;
+}
+
+#reset-button {
+    background-color: green;
+}
+
+.form-row > button[type="submit"]{
+    background-color: indigo;
+}
+
+/* --------- Forms ---------- */
+
+form > * {
+    margin: 10px;
+}
+
+#custom-form {
+    margin: 0 auto;
+    padding: 10px;
+    width: 35%;
+    background-color: lightgray;
+}
+
+.form-row {
+    display: flex;
+}
+
+#submit-row {
+    justify-content: flex-end;
+}
+
+.form-row > label {
+    margin-right: 10%;
+}
