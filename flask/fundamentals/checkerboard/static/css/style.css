@@ -2,3 +2,29 @@
     margin: 0;
     padding: 0;
 }
+
+#header-container {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    margin: 20px 0 20px 0;
+    padding: 5px 0;
+    text-align: center;
+    width: 25%;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+#board {
+    border-collapse: collapse;
+}
+
+.square {
+    height: 40px;
+    width: 40px;
+}
