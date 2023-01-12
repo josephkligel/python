@@ -10,35 +10,46 @@
 </head>
 <body>
 
-    <div>
+    <div class="mb-4">
 
-        <h1 class="mb-4">Edit User {{ record.id }}</h1>
+        <h1>Add a New User</h1>
 
         <a id="users-link" href="/users">Home</a>
     
     </div>
 
-    <form action="/update_user" method="POST">
+    <form action="/create_user" method="POST">
 
-        <input type="hidden" name="id" value="{{ record.id }}">
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <p style="color: red;">{{ message }}</p>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
 
         <div class="mb-3 input-sm">
             <label class="form-label" for="fname">First Name:</label>
-            <input class="form-control" type="text" name="fname" value="{{ record.first_name }}">
+            <input class="form-control" type="text" name="fname" value="{{ form_data['fname'] }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="lname">Last Name:</label>
-            <input class="form-control" type="text" name="lname" value="{{ record.last_name }}">
+            <input class="form-control" type="text" name="lname" value="{{  form_data['lname'] }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="email">Email:</label>
-            <input class="form-control" type="email" name="email" value="{{ record.email }}">
+            <input class="form-control" type="text" name="email" value="{{ form_data['email'] }}">
         </div>
 
-        <button class="btn btn-dark" type="submit">Update</button>
-        <a href="/show/{{ record.id }}">Show</a>
+        <button class="btn btn-dark" type="submit">Create</button>
 
     </form>
 

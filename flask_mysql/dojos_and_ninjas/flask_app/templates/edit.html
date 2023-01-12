@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center">{{ ninja.first_name + " " + ninja.last_name }}</h1>
+
+
+<div class="d-flex justify-content-center p-5">
+    <form class="me-5" action="/update_ninja" method="POST">
+
+        <h2 class="mb-3">Edit Ninja</h2>
+
+        <div class="mb-3">
+            <input type="hidden" name="id" value="{{ ninja.id }}">
+
+            <label class="form-label" for="dname_select">Dojo Location:</label>
+            <select name="dname_select" class="form-select" name="dname">
+                <option>Select Location</option>
+                {% for dojo in dojos %}
+                    <option value="{{ dojo.id }}"
+                        {% if (dojo.id == ninja.dojo_id) %}
+                            selected
+                        {% endif %}
+                    >{{ dojo.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="fname">First Name:</label>
+            <input class="form-control" type="text" name="fname" value="{{ ninja.first_name }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="lname">Last Name:</label>
+            <input class="form-control" type="text" name="lname" value="{{ ninja.last_name }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="age">Age:</label>
+            <input class="form-control" type="number" name="age" value="{{ ninja.age }}">
+        </div>
+        
+        <a href="{{ url }}">Back to Dojo</a>
+
+        <button class="btn btn-dark" type="submit">Submit</button>
+
+    </form>
+
+
+</div>
+
+
+
+{% endblock %}

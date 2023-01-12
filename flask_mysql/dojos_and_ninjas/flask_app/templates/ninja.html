@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">Ninjas</h1>
+
+
+    <div class="d-flex justify-content-center p-5">
+        <form class="me-5" action="/create_ninja" method="POST">
+
+            <h2 class="mb-3">New Ninja</h2>
+
+            <div class="mb-3">
+                <label class="form-label" for="dname_select">Dojo Location:</label>
+                <select name="dname_select" class="form-select" name="dname">
+                    <option selected>Select Location</option>
+                    {% for dojo in dojos %}
+                        <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" for="fname">First Name:</label>
+                <input class="form-control" type="text" name="fname">
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" for="lname">Last Name:</label>
+                <input class="form-control" type="text" name="lname">
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" for="age">Age:</label>
+                <input class="form-control" type="number" name="age">
+            </div>
+    
+            <button class="btn btn-dark" type="submit">Submit</button>
+    
+        </form>
+    
+    </div>
+
+{% endblock %}

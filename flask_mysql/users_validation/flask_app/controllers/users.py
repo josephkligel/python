@@ -1,9 +1,10 @@
 from flask_app import app
 
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 
 from flask_app.models.user import User
 
+@app.route('/')
 @app.route('/users')
 def users():
     users = User.get_all()
@@ -12,16 +13,19 @@ def users():
 
 @app.route('/users/new')
 def new_user():
-    return render_template('create.html')
+    form_data = session['form'] if session.get('form') else None
+    session['form'] = None
+    return render_template('create.html', form_data = form_data)
 
 @app.route('/create_user', methods=['POST'])
 def create_user():
-    data = {
-        "fname": request.form['fname'],
-        "lname": request.form['lname'],
-        "email": request.form['email']
-    }
-    id = User.save(data)
+    # Validating form input. If not valid redirecting back to user creation page
+    if not User.validate_user(request.form):
+        # Saving form data through session
+        session['form'] = request.form
+        return redirect('/users/new')
+    # Saving form data in database
+    id = User.save(request.form)
 
     return redirect(f'/show/{id}')
 

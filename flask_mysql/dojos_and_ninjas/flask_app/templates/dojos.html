@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center">Dojos</h1>
+
+<div class="d-flex justify-content-center p-5">
+
+    <form class="me-5" action="/create_dojo" method="POST">
+
+        <h2 class="mb-3">New Dojo</h2>
+
+        <div class="mb-3">
+            <label class="form-label" for="dname">Dojo Name:</label>
+            <input class="form-control" type="text" name="dname">
+        </div>
+
+        <button class="btn btn-dark" type="submit">Submit</button>
+
+    </form>
+    
+    <div>
+        <h2 class="mb-3">All Dojos</h2>
+        <table class="table table-dark table-striped w-auto">
+            <thead>
+                <th>Name</th>
+                <th>Created ON</th>
+            </thead>
+            <tbody>
+                    {% for dojo in dojos %}
+                        <tr>
+                            <td><a href="/show/dojo/{{ dojo.id }}">{{ dojo.name }}</a></td>
+                            <td>{{ dojo.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+
+
+</div>
+
+
+{% endblock %}

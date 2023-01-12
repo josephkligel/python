@@ -10,32 +10,35 @@
 </head>
 <body>
 
-    <div>
+    <div class="mb-4">
 
-        <h1 class="mb-4">Add a New User</h1>
+        <h1>Edit User {{ record.id }}</h1>
 
-        <a id="users-link" href="/users">Home</a>
+        <a href="/users">Home</a>
     
     </div>
 
-    <form action="/create_user" method="POST">
+    <form class="w-50" action="/update_user" method="POST">
+
+        <input type="hidden" name="id" value="{{ record.id }}">
 
         <div class="mb-3 input-sm">
             <label class="form-label" for="fname">First Name:</label>
-            <input class="form-control" type="text" name="fname">
+            <input class="form-control" type="text" name="fname" value="{{ record.first_name }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="lname">Last Name:</label>
-            <input class="form-control" type="text" name="lname">
+            <input class="form-control" type="text" name="lname" value="{{ record.last_name }}">
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label class="form-label" for="email">Email:</label>
-            <input class="form-control" type="email" name="email">
+            <input class="form-control" type="email" name="email" value="{{ record.email }}">
         </div>
 
-        <button class="btn btn-dark" type="submit">Create</button>
+        <button class="btn btn-dark me-3" type="submit">Update</button>
+        <a class="btn btn-primary" href="/show/{{ record.id }}">Show</a>
 
     </form>
 

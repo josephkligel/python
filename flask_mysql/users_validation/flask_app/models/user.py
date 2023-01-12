@@ -1,5 +1,8 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
+# Importing flash to validate and show requirements for user parameters
+from flask import flash
+import re
 # model the class after the friend table from our database
 
 class User:
@@ -44,7 +47,7 @@ class User:
 
     @classmethod
     def update_record(cls, data):
-        query = "UPDATE users SET first_name = %(fname)s, last_name= %(lname)s, email = %(email)s, updated_at = NOW() WHERE id = %(id)s"
+        query = "UPDATE users SET first_name = %(fname)s, last_name= %(lname)s, email = %(email)s, updated_at = NOW(), dojo_id = %(dojo_id)s WHERE id = %(id)s"
 
         return connectToMySQL('users_schema').query_db(query, data)
 
@@ -53,4 +56,28 @@ class User:
         query = "DELETE FROM users WHERE id = %(id)s"
 
         return connectToMySQL('users_schema').query_db(query, data)
+
+    @staticmethod
+    def validate_user(user):
+        is_valid = True # Set to True
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        all_users = User.get_all()
+        # Checking all fields for blanks
+        for item in user.values():
+            if len(item) <= 0:
+                flash("There are blank field!")
+                is_valid = False
+                return is_valid
+        # Checking email is valid
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invalid email address!")
+            is_valid = False
+        # Check if email is unique
+        for individual_user in all_users:
+            if(individual_user.email == user['email']):
+                flash(f"Email address {individual_user.email} is already in use")
+                is_valid = False
+        
+        return is_valid
+        
 
