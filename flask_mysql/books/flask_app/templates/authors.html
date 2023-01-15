@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block left_content %}
+    <div class="mb-5">
+        <h1>New Author</h1>
+
+        <form action="/create_author", method="post">
+
+            <div class="form-group mb-3">
+                <label class="form-label" for="name">Name:</label>
+                <input class="form-control" type="text" name="name">
+            </div>
+
+            <button class="btn btn-dark" type="submit">Create</button>
+        </form>
+
+    </div>
+
+    <a href="/books">Add Book</a>
+
+{% endblock %}
+
+{% block right_content %}
+    <h1>All Authors</h1>
+
+    <div class="card border-dark p-2">
+        {% for author in authors %}
+            <p><a href="/authors/{{ author.id }}">{{ author.name }}</a></p>
+        {% endfor %}
+    </div> 
+
+{% endblock %}

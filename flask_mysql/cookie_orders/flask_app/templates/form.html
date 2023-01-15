@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+    <div class="d-flex justify-content-between">
+        <h1 class="mb-4">{{ title }}</h1>
+        <a href="/">Back to Purchases</a>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <form action="{{ action_url }}" method="POST">
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+            
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+        <input type="hidden" name="id" value="{{ order.id }}">
+
+        <div class="form-group row mb-3">
+            <label class="col col-form-label" for="customer_name">Customer Name:</label>
+            <input class="col col-form-control" type="text" name="customer_name" value="{{ order.customer_name }}">
+        </div>
+
+        <div class="form-group row mb-3">
+            <label class="col col-form-label" for="cookie-type">Cookie Type:</label>
+            <input class="col col-form-control" type="text" name="cookie_type" value="{{ order.cookie_type }}">
+        </div>
+
+        <div class="form-group row mb-3">
+            <label class="col col-form-label" for="num-of-boxes">Number of Boxes:</label>
+            <input class="col col-form-control" type="number" name="num_of_boxes" value="{{ order.num_of_boxes }}">
+        </div>
+
+        <button class="btn btn-primary float-end">Submit</button>
+
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block left_content %}
+
+    <h1>Title: {{ title }}</h1>
+    <div class="card border-dark mb-5">
+        <div class="card-body">
+            <h4>Favorited By:</h4>
+            <ul style="list-style-type: none;">
+                {% for author in authors %}
+                    <li>{{ author.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <a class="me-4" href="/">Home</a>
+    <a href="/books">Back to Books</a>
+
+{% endblock %}
+
+{% block right_content %}
+
+<h1>Also Favorited By</h1>
+
+<form action="/create_favorite", method="post">
+
+    <input type="hidden" name="book_id" value="{{ book_id }}">
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="author_id">Author:</label>
+        <select class="form-select" name="author_id">
+            <option>Select Author</option>
+            {% for non_fave_author in non_fave_authors %}
+                <option value="{{ non_fave_author.id }}">{{ non_fave_author.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button class="btn btn-dark" type="submit">Create</button>
+</form>
+
+{% endblock %}

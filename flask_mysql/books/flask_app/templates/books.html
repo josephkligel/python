@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block left_content %}
+
+    <div class="mb-5">
+        <h1>New Book</h1>
+
+        <form action="/create_book", method="post">
+
+            <div class="form -group mb-3">
+                <label class="form-label" for="title">Title:</label>
+                <input class="form-control" type="text" name="title">
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label" for="num_of_pages">Number of Pages:</label>
+                <input class="form-control" type="text" name="num_of_pages">
+            </div>
+
+            <button class="btn btn-dark" type="submit">Create</button>
+        </form>
+    </div>
+
+    <a href="/">Home</a>
+{% endblock %}
+
+{% block right_content %}
+    <h1>All Books</h1>
+
+    <div class="card border-dark p-2">
+        {% for book in books %}
+            <p><a href="/books/{{ book.id }}">{{ book.title }}</a></p>
+        {% endfor %}
+    </div>    
+{% endblock %}
