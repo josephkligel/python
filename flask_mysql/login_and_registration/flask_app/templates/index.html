@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block left %}
+
+    <form class="bg-dark p-4 text-white col me-5" action="/register_user" method="post">
+       
+        <h1 class="text-primary">Register</h1>
+
+        <div>
+            {% if not login_check %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+            {% endif %}
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="first_name">First Name:</label>
+            <input class="form-control" type="text" name="first_name" value="{{ registration['first_name'] }}">
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="last_name">Last Name:</label>
+            <input class="form-control" type="text" name="last_name" value="{{ registration['last_name'] }}">
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="text" name="email" value="{{ registration['email'] }}">
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="password">Password:</label>
+            <input class="form-control" type="password" name="password" value="{{ registration['password'] }}">
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="password-confirm">Password Confirmation:</label>
+            <input class="form-control" type="password" name="password-confirm" value="{{ registration['password-confirm'] }}">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+
+
+{% endblock %}
+
+{% block right %}
+
+    <form class="bg-dark p-4 text-white col" action="/login_user" method="post">
+
+        <div>
+            {% if login_check %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+            {% endif %}
+        </div>
+
+        <h1 class="text-success">Login</h1>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="text" name="email" value="{{ login['email'] }}">
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" name="password" value="{{ login['email'] }}">
+        </div>
+
+        <button class="btn btn-success" type="submit">Login</button>
+
+    </form>
+ 
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block success %}
+
+    <h1 class="text-center text-success mb-5">Welcome {{ user['first_name'] + ' ' + user['last_name'] }}</h1>
+
+    <a class="btn btn-success" href="/logout">Logout</a>
+
+{% endblock %}
