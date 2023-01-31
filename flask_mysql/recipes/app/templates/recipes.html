@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>Welcome, {{ name }}</h1>
+    <div class="float-end">
+        <a class="me-4" href="/recipes/new">+ Create</a>
+        <a href="/logout">Logout</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <p>All Posted Recipes:</p>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <th>Name</th>
+            <th>Under</th>
+            <th>Posted By</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ 'Yes' if recipe.under_thirty else 'No'  }}</td>
+                    <td>{{ recipe.user.first_name }}</td>
+                    <td>
+                        <a href="/recipes/{{ recipe.id }}">view recipe</a>
+                        {% if user.id == recipe.user.id %}
+                        |
+                            <a href="/recipes/edit/{{ recipe.id }}">edit</a>
+                        |
+                            <a href="/recipes/delete/{{ recipe.id }}">delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>    
+
+{% endblock %} 

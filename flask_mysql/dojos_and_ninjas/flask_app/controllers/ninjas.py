@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, session
 from flask_app.models.ninja import Ninja
 from flask_app.models.dojo import Dojo
 
-@app.route('/ninja')
+@app.route('/ninjas')
 def ninja_page():
     dojos = Dojo.get_all()
     return render_template('ninja.html', dojos = dojos)
@@ -23,7 +23,7 @@ def create_ninja():
 
     return redirect(f'/show/dojo/{data["did"]}')
 
-@app.route('/edit/ninja/<id>')
+@app.route('/edit/ninjas/<id>')
 def edit_ninja(id):
     data = {"id": id}
     dojos = Dojo.get_all()
@@ -48,7 +48,7 @@ def update_ninja():
 
     return redirect(f'/show/dojo/{data["dojo_id"]}')
 
-@app.route('/delete/ninja/<id>')
+@app.route('/delete/ninjas/<id>')
 def delete_ninja(id):
     data = {'id': id}
     print(Ninja.delete(data))

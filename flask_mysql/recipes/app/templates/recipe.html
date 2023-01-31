@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+    <h1>Welcome, {{ recipe.user.first_name }}</h1>
+    <div class="float-end">
+        <a class="me-4" href="/recipes">Back to recipes</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="d-flex align-items-center mt-4 mb-4">
+            <h2 class="col">{{ recipe.name }}</h2>
+    
+            <h4 class="col-md-auto">Posted By: {{ recipe.user.first_name }}</h4>
+        </div>    
+    
+        <div class="card pt-2 pb-4 border-dark border-3">
+            <div class="card-body">
+                <div class="row">
+                    <label class="col" for="description">Description:</label>
+                    <p id="description" class="col-7">{{ recipe.description }}</p>
+                </div>
+    
+                <div class="row">
+                    <label class="col" for="under_thirty">Under Thirty Minutes?</label>
+                    <p id="under_thirty" class="col-7">{{ 'Yes' if recipe.under_thirty else 'No' }}</p>
+                </div>
+    
+                <div class="row">
+                    <label class="col" for="instructions">Instructions:</label>
+                    <p id="instructions" class="col-7">{{ recipe.instructions }}</p>
+                </div>
+    
+                <div class="row">
+                    <label class="col" for="date_cooked">Date Made:</label>
+                    <p id="date_cooked" class="col-7">{{ recipe.date_cooked }}</p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+{% endblock %}

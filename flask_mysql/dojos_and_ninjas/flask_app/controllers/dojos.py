@@ -22,10 +22,8 @@ def create_dojo():
 # Show individual dojo pages
 @app.route('/show/dojo/<id>')
 def show_dojo(id):
-    # Retreive dojo from dojos table
-    data = {"id": id}
-    dojo = Dojo.get_dojo_by_id(data)[0]
-    # Get all ninjas from database by location
-    ninjas = Ninja.get_ninjas_by_dojo_id(data)
+    # Create dojo instance from id. The instance includes all ninjas from that dojo
+    dojo = Dojo.get_one(id)
+    print(dojo.ninjas)
     session['dojo_url'] = request.url
-    return render_template('dojo_record.html', dojo = dojo, ninjas = ninjas)
+    return render_template('dojo_record.html', dojo = dojo)

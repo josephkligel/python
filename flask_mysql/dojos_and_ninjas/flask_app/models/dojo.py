@@ -1,4 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.ninja import Ninja
 
 class Dojo:
 
@@ -7,6 +8,8 @@ class Dojo:
         self.name = data['name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+
+        self.ninjas = []
 
     # Get all dojos from database
     @classmethod
@@ -37,3 +40,36 @@ class Dojo:
         query = "SELECT * FROM dojos WHERE id = %(id)s;"
         # Get and return result
         return connectToMySQL('dojo_and_ninjas_schema').query_db(query, data)
+
+    # Get ninjas from dojo using left join
+    @classmethod
+    def get_one(cls, id):
+        # Query to get ninjas using a dojo's id
+        query = """
+            SELECT
+                *
+            FROM dojos
+                LEFT JOIN ninjas ON ninjas.dojo_id = dojos.id
+            WHERE dojos.id = %(id)s;
+        """
+        # Assigning ninjas to a list
+        results = connectToMySQL('dojo_and_ninjas_schema').query_db(query, {'id': id})
+        # Break out of function early if there are no ninjas
+        if not results:
+            return None
+        # Create dojo instance from first result of ninjas
+        dojo = cls(results[0])
+
+        for row in results:
+            if row['ninjas.id']:
+                dojo.ninjas.append(Ninja(
+                    {
+                        'id': row['ninjas.id'],
+                        'first_name': row['first_name'],
+                        'last_name': row['last_name'],
+                        'age': row['age'],
+                        'created_at': row['ninjas.created_at']
+                    }
+                ))
+        
+        return dojo

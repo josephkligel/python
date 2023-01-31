@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+    <h1>Sasquatch Websighting</h1>
+    <div>
+        <h2>{{ user.first_name + " " + user.last_name }}</h2>
+        <a class="btn btn-outline-primary d-block mb-2" href="/dashboard">Dashboard</a>
+        <a class="btn btn-outline-secondary float-end" href="/logout">Logout</a>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <h2 class="mb-4">{{ sighting.location }} on {{ sighting.date_of_sighting.strftime('%B %d, %Y') }}</h2>
+
+    <div class="card w-50 pt-2 border-dark border-2">
+        <div class="card-body">
+
+            <div class="mb-4">
+                <strong>What Happened:</strong>
+                <p>{{ sighting.details }}</p>
+            </div>
+
+            <div class="mb-4">
+                <p class="col"><strong># of Sasquatches:</strong> {{ sighting.number_of_sasquatches }}</p>
+            </div>
+
+            <div>
+                <p><strong>Reported By:</strong> {{ sighting.user.first_name + " " + sighting.user.last_name }}</p>
+            </div>
+
+        </div>
+    </div>
+    
+{% endblock %}

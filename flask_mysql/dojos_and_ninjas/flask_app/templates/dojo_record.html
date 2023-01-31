@@ -14,17 +14,19 @@
                 <th>Actions</th>
             </thead>
             <tbody>
-                {% for ninja in ninjas %}
-                    <tr>
-                        <td>{{ ninja.first_name }}</td>
-                        <td>{{ ninja.last_name }}</td>
-                        <td>{{ ninja.age }}</td>
-                        <td>
-                            <a href="/edit/ninja/{{ ninja.id }}">Edit</a>
-                            <a href="/delete/ninja/{{ ninja.id }}">Delete</a>
-                        </td>
-                    </tr>
-                {% endfor %}
+                {% if dojo.ninjas %}
+                    {% for ninja in dojo.ninjas %}
+                        <tr>
+                            <td>{{ ninja.first_name }}</td>
+                            <td>{{ ninja.last_name }}</td>
+                            <td>{{ ninja.age }}</td>
+                            <td>
+                                <a href="/edit/ninja/{{ ninja.id }}">Edit</a>
+                                <a href="/delete/ninja/{{ ninja.id }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
             </tbody>
         </table>
 

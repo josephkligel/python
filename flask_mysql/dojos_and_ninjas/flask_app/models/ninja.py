@@ -9,7 +9,6 @@ class Ninja:
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
-        self.full_name = self.first_name + ' ' + self.last_name
         self.age = data['age']
         self.created_at = data['created_at']
 
@@ -57,7 +56,6 @@ class Ninja:
         query = "UPDATE ninjas SET first_name = %(fname)s, last_name = %(lname)s, age = %(age)s, updated_at = NOW(), dojo_id = %(dojo_id)s WHERE id = %(id)s;"
 
         return connectToMySQL('dojo_and_ninjas_schema').query_db(query, data)
-
 
     # Delete ninja
     @classmethod
